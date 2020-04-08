@@ -1,0 +1,7 @@
+Debug/
+Release/
+.settings/
+.cproject
+.project
+.mxproject
+TouchGFX/build/
