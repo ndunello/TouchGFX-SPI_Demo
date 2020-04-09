@@ -163,7 +163,7 @@ void TouchGFXHAL::copyFrameBufferBlockToLCD(const touchgfx::Rect rect)
     for (height = 0; height < rect.height ; height++)
     {
         //ptr = getClientFrameBuffer() + rect.x + (height + rect.y)  * BSP_LCD_GetXSize();
-    	ptr = getClientFrameBuffer() + rect.x + (height + rect.y)  * 240;
+    	ptr = getClientFrameBuffer() + rect.x + (height + rect.y)  * 320;
         LCD_IO_WriteMultipleData((uint16_t*)ptr, rect.width);
     }
 }

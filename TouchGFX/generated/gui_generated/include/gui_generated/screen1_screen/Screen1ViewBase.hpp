@@ -15,8 +15,6 @@ public:
     Screen1ViewBase();
     virtual ~Screen1ViewBase() {}
     virtual void setupScreen();
-    virtual void handleTickEvent();
-    virtual void afterTransition();
 
 protected:
     FrontendApplication& application() {
@@ -26,15 +24,11 @@ protected:
     /*
      * Member Declarations
      */
-    touchgfx::Box background;
+    touchgfx::Box background_left;
+    touchgfx::Box background_center;
+    touchgfx::Box background_right;
 
 private:
-
-    /*
-     * Delay Variable Declarations
-     */
-    static const uint16_t WAIT_DURATION = 120;
-    uint16_t waitCounter;
 
 };
 

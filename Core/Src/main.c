@@ -24,7 +24,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "ili9341.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -111,7 +111,7 @@ int main(void)
   MX_TIM13_Init();
   MX_TouchGFX_Init();
   /* USER CODE BEGIN 2 */
-
+  ILI9341_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */

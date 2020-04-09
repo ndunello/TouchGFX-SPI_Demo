@@ -37,7 +37,7 @@ void TouchGFXGeneratedHAL::initialize()
      * updating the display. If not locked, DMA transfers will begin as soon as
      * possible. Default is true (DMA is locked with TFT).
      */
-    lockDMAToFrontPorch(true);
+    lockDMAToFrontPorch(false);
 }
 
 void TouchGFXGeneratedHAL::configureInterrupts()

@@ -4,42 +4,24 @@
 #include <gui_generated/screen1_screen/Screen1ViewBase.hpp>
 #include <touchgfx/Color.hpp>
 
-Screen1ViewBase::Screen1ViewBase() :
-    waitCounter(0)
+Screen1ViewBase::Screen1ViewBase()
 {
 
-    background.setPosition(0, 0, 320, 240);
-    background.setColor(touchgfx::Color::getColorFrom24BitRGB(67, 210, 131));
+    background_left.setPosition(0, 0, 106, 240);
+    background_left.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 0, 0));
 
-    add(background);
+    background_center.setPosition(107, 0, 106, 240);
+    background_center.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 255, 0));
+
+    background_right.setPosition(214, 0, 106, 240);
+    background_right.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 255));
+
+    add(background_left);
+    add(background_center);
+    add(background_right);
 }
 
 void Screen1ViewBase::setupScreen()
 {
 
-}
-
-//Handles delays
-void Screen1ViewBase::handleTickEvent()
-{
-    if(waitCounter > 0)
-    {
-        waitCounter--;
-        if(waitCounter == 0)
-        {
-            //goToScreen2
-            //When Wait completed change screen to Screen2
-            //Go to Screen2 with screen transition towards East
-            application().gotoScreen2ScreenSlideTransitionEast();
-        }
-    }
-}
-
-//Called when the screen is done with transition/load
-void Screen1ViewBase::afterTransition()
-{
-    //Wait
-    //When screen is entered delay
-    //Delay for 2000 ms (120 Ticks)
-    waitCounter = WAIT_DURATION;
 }

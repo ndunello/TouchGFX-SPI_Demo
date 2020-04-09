@@ -5,15 +5,15 @@
         "Components": [
           {
             "Color": {
-              "Red": 67,
-              "Green": 210,
-              "Blue": 131
+              "Red": 255,
+              "Green": 0,
+              "Blue": 0
             },
             "Alpha": 255,
-            "Name": "background",
+            "Name": "background_left",
             "X": 0,
             "Y": 0,
-            "Width": 320,
+            "Width": 106,
             "Height": 240,
             "Type": "Box",
             "Visible": true,
@@ -21,52 +21,37 @@
             "Clickable": false,
             "Fadeable": false,
             "Moveable": false
-          }
-        ],
-        "Interactions": [
-          {
-            "InteractionName": "Wait",
-            "HasCompletedTrigger": true,
-            "Trigger": {
-              "Type": "TriggerScreenEntered"
-            },
-            "Action": {
-              "Duration": 2000,
-              "Type": "ActionDelay"
-            }
           },
-          {
-            "InteractionName": "goToScreen2",
-            "HasCompletedTrigger": false,
-            "Trigger": {
-              "InteractionToTriggerOn": "Wait",
-              "Type": "TriggerInteractionCompleted"
-            },
-            "Action": {
-              "ScreenTransitionType": "ScreenTransitionSlide",
-              "ScreenTransitionDirection": "East",
-              "ActionComponent": "Screen2",
-              "Type": "ActionGotoScreen"
-            }
-          }
-        ],
-        "Name": "Screen1",
-        "OverrideDefaultBufferSize": false,
-        "CanvasBufferSize": 0
-      },
-      {
-        "Components": [
           {
             "Color": {
-              "Red": 121,
-              "Green": 202,
-              "Blue": 245
+              "Red": 0,
+              "Green": 255,
+              "Blue": 0
             },
             "Alpha": 255,
-            "Name": "background",
-            "X": 0,
+            "Name": "background_center",
+            "X": 107,
             "Y": 0,
-            "Width": 320,
+            "Width": 106,
+            "Height": 240,
+            "Type": "Box",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Color": {
+              "Red": 0,
+              "Green": 0,
+              "Blue": 255
+            },
+            "Alpha": 255,
+            "Name": "background_right",
+            "X": 214,
+            "Y": 0,
+            "Width": 106,
             "Height": 240,
             "Type": "Box",
             "Visible": true,
@@ -76,34 +61,8 @@
             "Moveable": false
           }
         ],
-        "Interactions": [
-          {
-            "InteractionName": "wait",
-            "HasCompletedTrigger": true,
-            "Trigger": {
-              "Type": "TriggerScreenEntered"
-            },
-            "Action": {
-              "Duration": 2000,
-              "Type": "ActionDelay"
-            }
-          },
-          {
-            "InteractionName": "goToScreen1",
-            "HasCompletedTrigger": false,
-            "Trigger": {
-              "InteractionToTriggerOn": "wait",
-              "Type": "TriggerInteractionCompleted"
-            },
-            "Action": {
-              "ScreenTransitionType": "ScreenTransitionSlide",
-              "ScreenTransitionDirection": "West",
-              "ActionComponent": "Screen1",
-              "Type": "ActionGotoScreen"
-            }
-          }
-        ],
-        "Name": "Screen2",
+        "Interactions": [],
+        "Name": "Screen1",
         "OverrideDefaultBufferSize": false,
         "CanvasBufferSize": 0
       }
