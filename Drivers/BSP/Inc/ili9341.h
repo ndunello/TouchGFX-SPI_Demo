@@ -16,6 +16,9 @@ void ILI9341_DrawBitmap(uint16_t w, uint16_t h, uint8_t *s);
 void ILI9341_WritePixel(uint16_t x, uint16_t y, uint16_t color);
 void ILI9341_EndOfDrawBitmap(void);
 
+void LCD_WR_REG(uint8_t data);
+void            LCD_IO_WriteMultipleData(uint16_t *pData, uint32_t Size);
+
 #ifdef __cplusplus
 }
 #endif

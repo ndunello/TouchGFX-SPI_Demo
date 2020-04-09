@@ -18,7 +18,9 @@
 
 /* USER CODE BEGIN TouchGFXHAL.cpp */
 
+#include <touchgfx/hal/OSWrappers.hpp>
 #include "stm32f7xx.h"
+#include "ili9341.h"
 
 using namespace touchgfx;
 
@@ -79,7 +81,16 @@ void TouchGFXHAL::flushFrameBuffer(const touchgfx::Rect& rect)
     // Please note, HAL::flushFrameBuffer(const touchgfx::Rect& rect) must
     // be called to notify the touchgfx framework that flush has been performed.
 
-    TouchGFXGeneratedHAL::flushFrameBuffer(rect);
+    //TouchGFXGeneratedHAL::flushFrameBuffer(rect);
+	/* Set Cursor */
+	ILI9341_SetWindow(rect.x, rect.y, rect.width, rect.height);
+
+	/* Prepare to write to LCD RAM */
+	//ST7789H2_WriteReg(ST7789H2_WRITE_RAM, (uint8_t*)NULL, 0);
+	LCD_WR_REG(0x2c);
+
+	/* Send Pixels */
+	this->copyFrameBufferBlockToLCD(rect);
 
     // If the framebuffer is placed in Write Through cached memory (e.g. SRAM) then we need
     // to flush the Dcache to make sure framebuffer is correct in RAM. That's done
@@ -141,6 +152,28 @@ void TouchGFXHAL::enableLCDControllerInterrupt()
 
     TouchGFXGeneratedHAL::enableLCDControllerInterrupt();
 }
+
+void TouchGFXHAL::copyFrameBufferBlockToLCD(const touchgfx::Rect rect)
+{
+    __IO uint16_t* ptr;
+    uint32_t height;
+
+    // Use default implementation (CPU copy!).
+    // This can be accelerated using regular DMA hardware
+    for (height = 0; height < rect.height ; height++)
+    {
+        //ptr = getClientFrameBuffer() + rect.x + (height + rect.y)  * BSP_LCD_GetXSize();
+    	ptr = getClientFrameBuffer() + rect.x + (height + rect.y)  * 240;
+        LCD_IO_WriteMultipleData((uint16_t*)ptr, rect.width);
+    }
+}
+
+extern "C" void touchgfx_signalVSyncTimer(void)
+{
+    HAL::getInstance()->vSync();
+    touchgfx::OSWrappers::signalVSync();
+}
+
 
 /* USER CODE END TouchGFXHAL.cpp */
 

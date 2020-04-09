@@ -13,7 +13,7 @@ extern SPI_HandleTypeDef hspi1;
 void ILI9341_Reset(void);
 void ILI9341_SoftReset(void);
 
-static void LCD_WR_REG(uint8_t data);
+void LCD_WR_REG(uint8_t data);
 static void LCD_WR_DATA(uint8_t data);
 static void LCD_direction(LCD_Horizontal_t direction);
 static void RESET_L(void);
@@ -243,7 +243,7 @@ void ILI9341_SoftReset(void)
 }
 
 
-static void LCD_WR_REG(uint8_t data)
+void LCD_WR_REG(uint8_t data)
 {
 	DC_L();
 	if (HAL_SPI_Transmit(&hspi1, &data, 1, 1000) != HAL_OK) {
@@ -257,6 +257,11 @@ static void LCD_WR_DATA(uint8_t data)
 	if (HAL_SPI_Transmit(&hspi1, &data, 1, 1000) != HAL_OK) {
 		Error_Handler();
 	}
+}
+
+void LCD_IO_WriteMultipleData(uint16_t *pData, uint32_t Size)
+{
+	HAL_SPI_Transmit(&hspi1, (uint8_t*)pData, Size * 2, HAL_MAX_DELAY);
 }
 
 static void LCD_direction(LCD_Horizontal_t direction)

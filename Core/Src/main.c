@@ -321,6 +321,7 @@ static void MX_TIM13_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN TIM13_Init 2 */
+  HAL_TIM_Base_Start_IT(&htim13);
 
   /* USER CODE END TIM13_Init 2 */
 
@@ -496,7 +497,17 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+extern void touchgfx_signalVSyncTimer(void);
 
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if (htim->Instance == TIM13) {
+		touchgfx_signalVSyncTimer();
+	}
+	if (htim->Instance == TIM12) {
+
+	}
+}
 /* USER CODE END 4 */
 
 /**
