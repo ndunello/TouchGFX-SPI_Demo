@@ -9,6 +9,7 @@ typedef enum {
 
 extern void Error_Handler(void);
 extern SPI_HandleTypeDef hspi1;
+static __IO uint8_t spiDmaTransferComplete;
 
 void ILI9341_Reset(void);
 void ILI9341_SoftReset(void);
@@ -265,7 +266,15 @@ void LCD_IO_WriteMultipleData(uint16_t *pData, uint32_t Size)
 	ConvHL((uint8_t *)pData, (int32_t)Size*2);
 
 	DC_H();
-	HAL_SPI_Transmit(&hspi1, (uint8_t*)pData, Size * 2, HAL_MAX_DELAY);
+//	HAL_SPI_Transmit(&hspi1, (uint8_t*)pData, Size * 2, HAL_MAX_DELAY);
+	spiDmaTransferComplete = 0;
+	HAL_SPI_Transmit_DMA(&hspi1, (uint8_t*)pData, Size * 2);
+	while(spiDmaTransferComplete == 0);
+}
+
+void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
+{
+	spiDmaTransferComplete = 1;
 }
 
 static void LCD_direction(LCD_Horizontal_t direction)
