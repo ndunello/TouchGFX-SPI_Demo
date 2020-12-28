@@ -83,7 +83,7 @@ void TouchGFXHAL::flushFrameBuffer(const touchgfx::Rect& rect)
 
     //TouchGFXGeneratedHAL::flushFrameBuffer(rect);
 	/* Set Cursor */
-	ILI9341_SetWindow(rect.x, rect.y, rect.width, rect.height);
+	ILI9341_SetWindow(rect.x, rect.y, rect.width + rect.x - 1, rect.height + rect.y - 1);
 
 	/* Prepare to write to LCD RAM */
 	//ST7789H2_WriteReg(ST7789H2_WRITE_RAM, (uint8_t*)NULL, 0);
